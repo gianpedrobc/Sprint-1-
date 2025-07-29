@@ -89,7 +89,7 @@ if [ "$STATUS" -ne 200 ]; then
 fi
 ```
 
-###🔎Agendamento no cron:
+### 🔎Agendamento no cron:
 ```
 * * * * * /home/ubuntu/monitoramento.sh
 ```
@@ -97,14 +97,15 @@ Isso garante que o script rode a cada minuto.
 
 ---
 
-###🧪 Testes Realizados
+### 🧪 Testes Realizados
 
- ##✅ Site funcionando normalmente
+ ## ✅ Site funcionando normalmente
 
 
- ##❌ Servidor NGINX parado (simulação de erro)
+ ## ❌ Servidor NGINX parado (simulação de erro)
 
-###💡 Trecho do CloudFormation
+### 💡 Trecho do CloudFormation
+```
 AWSTemplateFormatVersion: '2010-09-09'
 Description: Criar EC2 com Nginx, script de inicialização e tags
 
@@ -118,6 +119,6 @@ Resources:
       SubnetId: "*****"
       SecurityGroupIds:
         	-"*****"
-
+```
 
 
