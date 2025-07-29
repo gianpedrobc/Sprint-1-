@@ -8,8 +8,9 @@ O projeto utiliza uma VPC com 4 sub-redes (2 públicas e 2 privadas), uma instâ
 ---
 
 ## 🌐 Diagrama da Arquitetura:
-
-
+<div>
+<img src="https://github.com/gianpedrobc/Sprint-1-/issues/1#issue-3274602895 width="700px" />
+</div>
 ---
 
 ## ⚙️ Recursos Utilizados
