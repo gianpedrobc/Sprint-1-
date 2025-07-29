@@ -99,11 +99,12 @@ Isso garante que o script rode a cada minuto.
 ---
 
 ### 🧪 Testes Realizados
-
+obs: O horario esta diferente por causa da localizacao do servidor e a minha 
  ## ✅ Site funcionando normalmente
 
 
- ## ❌ Servidor NGINX parado (simulação de erro)
+ ## ❌ Logs do Servidor Nginx 
+![Teste Monitoramento - Imagem 2](https://github.com/gianpedrobc/Sprint-1-/raw/e2c1ce3ad46d2de603cccc7161c2498fe62abc91/Documentos/img-test-2.png)
 
 ### 💡 Trecho do CloudFormation
 ```
