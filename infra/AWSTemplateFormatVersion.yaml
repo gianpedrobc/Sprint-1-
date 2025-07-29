@@ -10,7 +10,7 @@ Resources:
       KeyName: Server-nginx
       SubnetId: "*****"
       SecurityGroupIds:
-        - sg-preview-1
+        - "*****"
       BlockDeviceMappings:
         - DeviceName: /dev/sda1
           Ebs:
@@ -19,7 +19,7 @@ Resources:
             Encrypted: false
             DeleteOnTermination: true
             Iops: 3000
-            SnapshotId: snap-0bc1d350c2ac74766
+            SnapshotId:  "*****"
             Throughput: 125
       Tags:
         "*****"
