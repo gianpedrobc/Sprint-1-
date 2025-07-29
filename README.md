@@ -8,7 +8,7 @@ O projeto utiliza uma VPC com 4 sub-redes (2 públicas e 2 privadas), uma instâ
 ---
 
 ## 🌐 Diagrama da Arquitetura:
-[`documentos/infra.img`]
+
 
 ---
 
@@ -29,22 +29,32 @@ O projeto utiliza uma VPC com 4 sub-redes (2 públicas e 2 privadas), uma instâ
 
 ```bash
 #!/bin/bash
+
+# Atualiza pacotes
 apt update -y && apt upgrade -y
+
+# Instala nginx, git, node e npm
 apt install -y nginx git curl
 curl -fsSL https://deb.nodesource.com/setup_18.x | bash -
 apt install -y nodejs
 
+# Clona o repositório com o projeto React
 cd /opt
-git clone https://github.com/SEU_USUARIO/SEU_REPOSITORIO.git site
-cd site
+git clone https:https://github.com/Portifolio.git
+cd Portifolio 
+
+# Instala dependências e cria build
 npm install
 npm run build
 
+# Copia a build para o diretório do NGINX
 rm -rf /var/www/html/*
 cp -r build/* /var/www/html/
 
+# Inicia e habilita o NGINX
 systemctl start nginx
 systemctl enable nginx
+
 ```
 
 ---
@@ -53,23 +63,61 @@ systemctl enable nginx
 
 ```bash
 #!/bin/bash
+# pega o ipv4 publico da ec2 
 URL=$(curl -s https://checkip.amazonaws.com)
-STATUS=$(curl -s -o /dev/null -w "%{http_code}" http://$URL)
-DATA=$(date "+%Y-%m-%d %H:%M:%S")
+
 LOG="/var/log/monitor.log"
 
+# Pega o código de resposta do site (200 = OK)
+STATUS=$(curl -s -o /dev/null -w "%{http_code}" $URL )
+
+DATA=$(date "+%Y-%m-%d %H:%M:%S")
+
 if [ "$STATUS" -ne 200 ]; then
-  echo "$DATA - ERRO: Site fora do ar (status $STATUS)" >> $LOG
-  curl -H "Content-Type: application/json"        -X POST        -d "{"content": "🚨 ALERTA: Site fora do ar! Código $STATUS"}"        https://discord.com/api/webhooks/SEU_WEBHOOK
+
+        echo "$DATA - ERRO: Aplicação fora do ar (status $STATUS)" >> $LOG
+
+  # Envia alerta para o Discord
+  curl -H "Content-Type: application/json" \
+       -X POST \
+       -d "{\"content\": \"🚨 ALERTA: Site fora do ar! Código $STATUS\"}" \
+       https://discord.com
+
+#else
+#comentado para nao encher o log 
+        #echo "$DATA - OK: Aplicação funcionando (status $STATUS)" >> $LOG
 fi
 ```
 
-Agendado via `cron` para rodar a cada minuto.
+###🔎Agendamento no cron:
+```
+* * * * * /home/ubuntu/monitoramento.sh
+```
+Isso garante que o script rode a cada minuto.
 
 ---
 
-## 🧠 Conclusão
+###🧪 Testes Realizados
 
-Projeto DevOps com AWS demonstrando automação e monitoramento.
+ ##✅ Site funcionando normalmente
 
-Feito com ☁️ por [Seu Nome].
+
+ ##❌ Servidor NGINX parado (simulação de erro)
+
+###💡 Trecho do CloudFormation
+AWSTemplateFormatVersion: '2010-09-09'
+Description: Criar EC2 com Nginx, script de inicialização e tags
+
+Resources:
+  EC2Instance:
+    Type: AWS::EC2::Instance
+    Properties:
+      InstanceType: t2.micro
+      ImageId: ami-020cba7c55df1f615
+      KeyName: Server-nginx
+      SubnetId: "*****"
+      SecurityGroupIds:
+        	-"*****"
+
+
+
