@@ -25,7 +25,7 @@ O projeto utiliza uma VPC com 4 sub-redes (2 públicas e 2 privadas), uma instâ
 
 ---
 
-## 🔧 Instalação via User Data
+## 🔧 Trecho de Instalação via User Data
 
 ```bash
 #!/bin/bash
