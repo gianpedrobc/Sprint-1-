@@ -6,10 +6,10 @@ Criar uma estrutura básica para um site que funcione 24 horas por dia, de forma
 O projeto utiliza uma VPC com 4 sub-redes (2 públicas e 2 privadas), uma instância EC2 rodando um servidor NGINX que serve uma aplicação React, além de um sistema de monitoramento com alerta automático via Discord em caso de falha.
 
 ---
-
+<!--
 ## 🌐 Diagrama da Arquitetura:
 ![Teste Monitoramento - Imagem 2](https://raw.githubusercontent.com/gianpedrobc/Sprint-1-/refs/heads/main/Documentos/imginfra.jpg)
-
+-->
 ---
 
 ## ⚙️ Recursos Utilizados
